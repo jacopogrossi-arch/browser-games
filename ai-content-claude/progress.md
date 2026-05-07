@@ -1,6 +1,6 @@
 # Progress Log — AI Image & Video Generation
 
-## Stato generale (03/05/2026)
+## Stato generale (07/05/2026)
 
 Corso di generazione immagini e video AI. Progetto di studio: **luxury Italian fashion brand** (Ferrari, Toscana, old money aesthetic).
 
@@ -18,11 +18,42 @@ Corso di generazione immagini e video AI. Progetto di studio: **luxury Italian f
 - [x] JSON prompt creato in 2 versioni: 3D stylized + fotorealistica con negative_prompt
 - [x] Risultati salvati su Notion (pagina "risultato" → Homework 1)
 
+### Homework 1.3 — Costruire il Gusto Visivo
+- [x] Moodboard Pinterest creato (20–30 reference)
+- [x] Pattern visivi identificati e 10 keyword estetiche scritte
+- [x] 3 immagini coerenti generate in uno stile definito
+- [x] Risultati salvati su Notion
+
+### Homework 1.4 — Aesthetic Types
+- [x] 3 Pinterest board create per estetiche diverse
+- [x] Estetica cinematica scelta e 3 immagini AI generate
+- [x] Risultati salvati su Notion
+
+### Homework 1.5 — Character Creation
+- [x] Personaggio creato via PromptEngine (text-based + image-based)
+- [x] JSON prompt strutturato per character consistency
+- [x] Risultati salvati su Notion
+
+### Homework 1.6 — Campaign Generation
+- [x] Campaign generata con PromptEngine in Campaign mode
+- [x] Immagini prodotte con MidJourney usando OmniReference dal HW 1.5
+- [x] Risultati salvati su Notion
+
 ### Homework 2 — Video Generation (Kling)
 - [x] TTV prompt scritto e video generato (tracking shot Ferrari → close-up → car away)
 - [x] I2V prompt scritto usando frame di Homework 1 come immagine di partenza
 - [x] Bug identificato: Ferrari va in reverse in alcuni output I2V → workaround da testare
 - [x] Video I2V salvato su Google Drive
+
+### Homework 2.4 — Camera Movement
+- [x] 3–4 versioni generate cambiando solo il movimento camera (Static / Push-in / Pan / Tracking)
+- [x] Versione migliore selezionata con motivazione
+- [x] Risultati salvati su Notion
+
+### Homework 2.5 — LipSync
+- [x] Talking avatar creato con Kling (LipSync)
+- [x] Testati stili e personaggi diversi, confrontato realismo e movimento
+- [x] Risultati salvati su Notion
 
 ---
 
