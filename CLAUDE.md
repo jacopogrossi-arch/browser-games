@@ -1,74 +1,40 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## Project Overview
-
-A collection of browser-based games built with **vanilla JS, HTML5 Canvas, and CSS** — no build tools, no frameworks, no dependencies. Each game is a single self-contained `.html` file.
-
-## Running the Games
-
-Open any `.html` file directly in a browser. There is no server, build step, or install required:
-
-```
-start tictactoe.html
-start snake3.html
-```
-
-Or via the shell: `cmd.exe /c start "" "<absolute-path>.html"`
-
-## Repository & Git Workflow
-
-- Remote: https://github.com/jacopogrossi-arch/browser-games
-- Default branch: `master`
-- **Commit and push after every meaningful unit of work** — a new feature, a bug fix, a visual tweak. Never leave work uncommitted at the end of a session.
-- Commit messages: imperative mood, describe *what changed and why* (e.g. `Fix self-collision skip distance for 3-headed snake` not `updated snake3.html`).
-- Stage specific files by name (`git add snake3.html`) rather than `git add -A` to avoid committing unintended files.
-- Always run `git push` immediately after committing so the GitHub remote reflects the latest state and can be used to revert if needed.
-
-## Architecture
-
-Every game follows the same single-file pattern:
-
-```
-<head>   — charset, viewport, title
-<style>  — all CSS inline (no external sheets)
-<body>   — HTML structure (canvas, HUD divs, overlay)
-<script> — all game logic (no modules, no imports)
-```
-
-### Visual language (shared across all games)
-
-| Token | Value |
-|---|---|
-| Page background | `#1a1a2e` |
-| Surface / arena | `#16213e` |
-| Wall / border | `#0f3460` |
-| Accent red | `#e94560` |
-| Accent cyan | `#a8dadc` |
-
-All new games or UI additions should use these colours to stay visually consistent.
-
-### `snake3.html` — core concepts
-
-- **Trail-based body**: `snake.trail` is a flat `[{x,y}]` array. Index 0 = tail, last = fork point. Growth works by increasing `targetLength` and draining `pendingGrowth` one point per frame.
-- **3-head geometry**: `getHeads(snake)` returns three positions fanned out from the fork point using the perpendicular vector `(-sin(angle), cos(angle))`. This is the architectural centrepiece — all collision and rendering branches off it.
-- **Game loop**: `requestAnimationFrame` only; no `setInterval`. State machine: `'start' | 'running' | 'dead'`.
-- **Persistence**: high score in `localStorage` key `snake3_hi`.
-
-### `tictactoe.html` — core concepts
-
-- Pure DOM (no canvas). Board is a CSS Grid; cells use `data-i` attributes for indexing.
-- Win detection iterates `WINS` (8 static triplets) each move.
-- Session scores live in a plain object `{ x, o, d }`; no persistence.
+This file gives Claude Code the context to work well in this repository.
 
 ---
 
-## AI Content Automation Project
+## Chi lavora qui
 
-### Obiettivo
+Jacopo è un giovane italiano che studia fashion design ed economia, e in parallelo agli studi studia e applica l'AI — soprattutto automazioni e generazione video. Claude Code è il suo secondo cervello: lo usa sia per imparare che per costruire concretamente le cose su cui sta lavorando.
 
-Sistema quasi completamente automatizzato che genera e pubblica contenuti video sulla nicchia **moda maschile + brand building**, canale anonimo (no faccia, voiceover sintetico).
+Sul piano tecnico, Jacopo non è uno sviluppatore. Usa Claude Code con una certa fluidità, capisce la logica dei workflow, ma non ha esperienza con API, n8n, o programmazione generale. Questo non è un limite — è il punto di partenza. Quando lavoro con lui, l'obiettivo non è fare le cose al suo posto: è fargli capire quello che stiamo costruendo insieme, perché domani potrebbe doverlo spiegare agli iscritti della sua community.
+
+Il principio guida di questo repo: **semplice e funzionante batte elegante e complesso**. Non perché Jacopo non possa imparare cose complesse — ma perché il suo tempo vale di più sull'apprendimento e sulle decisioni strategiche.
+
+---
+
+## Git workflow
+
+- Remote: https://github.com/jacopogrossi-arch/browser-games — default branch `master`
+- Commit and push after every meaningful unit of work. Stage by filename, not `git add -A`.
+- Commit messages: imperative mood, what changed and why.
+
+---
+
+## AI Content Automation (n8n-automation/)
+
+### La visione
+
+L'obiettivo finale non è "fare video" — è costruire una macchina che pubblica contenuti sulla nicchia moda maschile quasi in automatico, così Jacopo può concentrarsi su Inverso e sulla community Skool. Il canale è anonimo (no faccia, voiceover AI sintetico): non per timidezza, ma perché un sistema anonimo è scalabile — non dipende da una presenza personale.
+
+Questo progetto è anche un prodotto da vendere: la community Skool "Come costruire un brand di moda con €1.000" mostrerà esattamente questo sistema come esempio reale. Ogni cosa che costruiamo qui è potenzialmente materiale didattico.
+
+### Come collaborare su questo progetto
+
+Jacopo sta imparando n8n e le API mentre costruisce. Non conosce ancora il funzionamento interno dei workflow, ma capisce il "perché" quando lo si spiega bene. Le spiegazioni devono arrivare fino al livello pratico — dove cliccare, cosa copiare, dove incollare. I termini tecnici vanno spiegati al primo utilizzo.
+
+In n8n, le soluzioni visuali (drag-and-drop tra nodi) sono da preferire al codice custom. Quando il codice è necessario, va commentato in italiano. Ogni nuova API si testa prima con un nodo HTTP Request minimale, prima di integrarla nella pipeline. Ogni workflow deve terminare con un nodo Telegram — è la conferma visibile che la macchina ha funzionato.
 
 ### Pipeline principale
 
@@ -103,86 +69,50 @@ Notifica Telegram → preview per revisione
 
 ### Monetizzazione
 
-- Community Skool "Come costruire un brand di moda con €1.000" — €29-49/mese
-- Target: 100 iscritti = €2.900-4.900/mese
+Community Skool "Come costruire un brand di moda con €1.000" — €29-49/mese. Target: 100 iscritti = €2.900-4.900/mese.
 
-### Regole di lavoro su questo progetto
+### Stato corrente
 
-- L'utente è un **principiante assoluto** su n8n, API e automazioni — non dare mai nulla per scontato
-- Spiega **sempre** ogni passaggio, anche quello che sembra ovvio: dove cliccare, cosa copiare, dove incollare
-- Usa un linguaggio **semplice e diretto**, senza gergo tecnico non spiegato
-- Se usi un termine tecnico, **spiegalo subito** tra parentesi o con un esempio
-- Spiega ogni nodo/blocco di codice **in italiano semplice**
-- Preferisci **soluzioni visuali in n8n** (senza codice) quando possibile
-- Scrivi sempre un **test minimale** prima di integrare un'API nuova
-- Ogni workflow n8n deve terminare con un **nodo notifica Telegram**
-- Il codice nei nodi custom va **commentato in italiano**
-- Priorità: **semplice e funzionante** > elegante e complesso
-
-### Struttura file progetto
-
-I file del progetto sono in `n8n-automation/`:
+Vedi `n8n-automation/progress.md` per lo stato aggiornato. File progetto in `n8n-automation/`:
 - `overview.md` — obiettivo, stack, pipeline, monetizzazione
-- `progress.md` — stato avanzamento dettagliato, note tecniche, prossimi passi
+- `progress.md` — stato avanzamento, note tecniche, prossimi passi
 - `workflows/workflow-01.md` — workflow attuale step by step
 - `prompts/system-prompt.md` — system prompt Claude per generare gli script
 
-### Stato (vedi `n8n-automation/progress.md` per il dettaglio aggiornato)
-
-Workflow funzionante con Schedule Trigger ogni 48h, argomento casuale da Google Sheet, generazione script con Claude, e voiceover ElevenLabs. Prossimo step: salvare l'audio su Google Drive.
-
 ---
 
-## AI Image & Video Generation Project
+## AI Image & Video Generation (ai-content-claude/)
 
-> **ATTENZIONE — Questo progetto è completamente separato dal progetto n8n sopra.**
-> NON usa n8n, NON ha pipeline automatizzata, NON pubblica sui social in automatico.
-> Riguarda la generazione manuale di immagini e video AI come skill creativa e potenziale servizio.
+### La visione
 
-### Obiettivo
+Questo progetto non è automazione — è un percorso di apprendimento creativo. L'obiettivo è sviluppare un "occhio" per la generazione di immagini e video AI di qualità professionale, applicato al settore moda/lusso. La skill, una volta acquisita, diventa un servizio da offrire a clienti.
 
-Imparare a generare immagini e video AI di qualità professionale usando strumenti come Gemini, Kling, Midjourney, Krea. Obiettivo finale: offrire questo come servizio a clienti nel settore moda/lusso.
+> Questo progetto è completamente separato da quello n8n sopra. Non usa workflow automatizzati. Il lavoro è manuale, iterativo, creativo — più vicino alla post-produzione fotografica che alla programmazione.
 
-### Stack strumenti
+### Brand di studio
 
-| Tool | Tipo | Uso |
-|------|------|-----|
-| Gemini / NanoBanana | Generatore immagini (free) | Concetti veloci, moodboard, test prompt |
-| Midjourney | Generatore immagini (pro) | Immagini ad alta qualità |
-| Krea | Generatore immagini (pro) | Ritratti realistici, stile fashion |
-| HiggsField | Generatore immagini (pro) | Ultra-realistico, campagne editoriali |
-| Kling | Generatore video | Text-to-Video e Image-to-Video |
-| HeyGen | Avatar AI | Presentatori video |
-| ElevenLabs | Voiceover AI | Narrazione sintetica |
+Il sandbox è un'identità visiva luxury Italian fashion: giovane uomo italiano elegante (~25 anni) in Ferrari convertibile anni '80, campagna Toscana, strade con pini. L'aesthetic è old money — dolce vita, Riviera italiana, lusso senza ostentazione. Non è il brief di un cliente reale: è un terreno di prova scelto perché il lusso richiede precisione comunicativa. O funziona visivamente, o non funziona — non c'è via di mezzo.
 
-### Brand di riferimento (progetto di studio)
-
-Visual identity **luxury Italian fashion / old money**:
-- Soggetto: giovane uomo italiano elegante, ~25 anni, stile classico
-- Scenario: Ferrari convertibile anni '80, campagna Toscana, strade con pini
-- Mood: dolce vita, Riviera Italiana anni '80, lusso senza ostentazione
 - Palette: amber `#F5E6C8`, gold `#C9A46A`, deep red `#8B0000`, near-black `#1E1E1E`
 - Riferimenti: campagne Marlboro anni '70, Helmut Newton, *Blade Runner 2049*
 
-### Struttura file progetto
+### Come collaborare su questo progetto
 
-I file del progetto sono in `ai-content-claude/`:
-- `style-guide.md` — identità visiva, palette, sistema prompt
-- `platform-cheatsheet.md` — quale tool usare per cosa
-- `prompts/hw1-image-prompts.md` — prompt immagini Homework 1
-- `prompts/hw2-video-prompts.md` — prompt video Homework 2 (Kling)
-- `progress.md` — log avanzamento e prossimi step
+Su questo progetto si ragiona come un direttore della fotografia che dà note — non come un programmatore. La struttura naturale di ogni prompt è:
 
-### Stato avanzamento (maggio 2026)
+**SHOT TYPE → LENS → LIGHT → TEXTURE → COMPOSITION → STYLE**
+
+I tool hanno caratteristiche diverse: Gemini/NanoBanana per iterazioni veloci e moodboard; Midjourney per qualità alta; Krea per ritratti fashion realistici; HiggsField per campagne ultra-realistiche; Kling per video (Text-to-Video e Image-to-Video).
+
+### Stato avanzamento
 
 - [x] Homework 1: 3 varianti prompt immagine + JSON prompt (Gemini)
 - [x] Homework 2: TTV e I2V con Kling (brand Ferrari/Toscana)
 - [ ] Homework 3 e successivi (in corso)
 
-### Regole di lavoro su questo progetto
-
-- Parla di **prompt visivi**, non di workflow o nodi n8n
-- Il lavoro è **manuale e creativo**, non automatizzato
-- Usa terminologia da **fotografia e regia**: lens, lighting, composition, shot type
-- Quando suggerisci miglioramenti ai prompt, usa la struttura: SHOT + LENS + LIGHT + TEXTURE + COMPOSITION + STYLE
-- NON mescolare mai questo progetto con il progetto n8n/automazioni
+File progetto in `ai-content-claude/`:
+- `style-guide.md` — identità visiva, palette, sistema prompt
+- `platform-cheatsheet.md` — quale tool usare per cosa
+- `prompts/hw1-image-prompts.md` — prompt immagini Homework 1
+- `prompts/hw2-video-prompts.md` — prompt video Homework 2 (Kling)
+- `progress.md` — log avanzamento e prossimi step

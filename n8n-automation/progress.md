@@ -1,6 +1,6 @@
 # Progress — n8n Automation
 
-_Ultimo aggiornamento: 03/05/2026_
+_Ultimo aggiornamento: 10/05/2026_
 
 ## Completato
 
@@ -13,24 +13,31 @@ _Ultimo aggiornamento: 03/05/2026_
 - [x] Google Sheets collegato in n8n (OAuth2, credenziale attiva)
 - [x] Google Sheet content queue creato — foglio "Sheet1", colonne: A=data, B=argomento, C=script
 - [x] Foglio "Argomenti" aggiunto al Google Sheet — header in A1, 8 argomenti nelle righe 2-9
-- [x] Schedule Trigger ogni 48h attivato (ha sostituito il trigger manuale)
+- [x] Schedule Trigger ogni 48h attivato
 - [x] Nodo Code: legge foglio Argomenti, sceglie argomento a caso, costruisce prompt
-- [x] Basic LLM Chain: Claude genera script TikTok 60s (output in `$json.text`)
+- [x] Basic LLM Chain: Claude genera script TikTok 60s
 - [x] Bug risolto (26/04/2026): nodo Code dopo LLM Chain che unisce script+argomento+data
-- [x] ElevenLabs integrato (26/04/2026): HTTP Request Raw → voiceover generato. Voice ID: `SAz9YHcvj6GT2YYXdXww`
+- [x] ElevenLabs integrato: HTTP Request Raw → voiceover generato. Voice ID: `SAz9YHcvj6GT2YYXdXww`
+- [x] Google Drive integrato (10/05/2026): audio .mp3 salvato su Drive + reso pubblico
+- [x] HeyGen integrato (10/05/2026): genera video con avatar Adriana (`Adriana_Business_Front_public`)
+- [x] Telegram integrato (10/05/2026): notifica finale con link video
+- [x] **PIPELINE COMPLETA E FUNZIONANTE** — workflow end-to-end testato con successo
 
-## In corso / Prossimi passi
+## Prossimi step
 
-- [ ] **PROSSIMO STEP:** Salvare l'audio su Google Drive — aggiungere nodo Google Drive dopo HTTP Request per salvare il file `.mp3` di ElevenLabs
-- [ ] Integrare HeyGen → video assemblato automaticamente
-- [ ] Aggiungere nodo Telegram finale → notifica preview con link al video
+- [ ] Migliorare qualità video: aggiungere B-roll cinematografico con Kling API
+- [ ] Aggiungere editing automatico con Shotstack (motion graphics, transizioni, testi)
 - [ ] Integrare Buffer → pubblicazione social automatica
+- [ ] Valutare avatar personalizzato su HeyGen
 
 ## Note tecniche importanti
 
 - n8n si avvia con `n8n start` — poi aprire http://localhost:5678
-- `npx n8n` NON funziona con Node.js v24 — usare sempre `npm install -g n8n` + `n8n start`
+- `npx n8n` NON funziona con Node.js v24
+- n8n in incognito se il browser normale non carica (problema di cache)
 - Output di Basic LLM Chain → `{{ $json.text }}`
-- Nel nodo Code dopo LLM Chain: `const script = $input.first().json.text` (non `.script`)
+- `argomento` nel secondo Code node: `const argomento = $('Code in JavaScript').first().json.argomento`
+- HeyGen: credenziale Header Auth con nome `X-Api-Key` (non OAuth)
+- Il file Drive deve essere reso pubblico prima di passare l'URL a HeyGen
+- Wait HeyGen: 12 minuti (7 non bastano per video da 60s)
 - URI redirect OAuth Google: `http://localhost:5678/rest/oauth2-credential/callback`
-- `{{ $json.script }}`, `{{ $json.argomento }}`, `{{ $json.data }}` → colonne Google Sheet
