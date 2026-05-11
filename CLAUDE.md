@@ -14,9 +14,21 @@ Il principio guida di questo repo: **semplice e funzionante batte elegante e com
 
 ---
 
+## Notion — Jackss HQ
+
+Jacopo gestisce tutta la sua vita e i suoi progetti in un unico workspace Notion chiamato **Jackss HQ**. È il suo sistema centrale, non uno strumento secondario. Contiene:
+
+- **Studio personale** — appunti, risorse, percorsi di apprendimento su AI, moda, economia e tutto quello che studia in autonomia.
+- **AI & Video Generation** — documentazione, idee, esperimenti e avanzamento sui progetti di automazione (n8n) e generazione creativa (immagini/video AI).
+- **Salute e sport** — tracking allenamenti, obiettivi fisici, abitudini.
+
+Quando si fa riferimento a documentazione personale, note di ricerca, o stato di un progetto che non è in questo repo, è probabile che si trovi su Notion / Jackss HQ. Usare il MCP Notion per accedervi se necessario.
+
+---
+
 ## Git workflow
 
-- Remote: https://github.com/jacopogrossi-arch/browser-games — default branch `master`
+- Remote: https://github.com/jacopogrossi-arch/jackss-hq — default branch `master`
 - Commit and push after every meaningful unit of work. Stage by filename, not `git add -A`.
 - Commit messages: imperative mood, what changed and why.
 
